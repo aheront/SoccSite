@@ -6,7 +6,6 @@ class FirstNameToUser < ActiveRecord::Migration[5.0]
       t.integer :sex
       t.date :birthday
       t.text :preference
-
     end
   end
 end
