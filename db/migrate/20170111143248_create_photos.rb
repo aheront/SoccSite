@@ -4,7 +4,6 @@ class CreatePhotos < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :file
       t.string :source_type
-      t.string :source_type
       t.integer :source_id
       t.timestamps
     end
