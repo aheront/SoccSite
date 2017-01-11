@@ -1,2 +1,0 @@
-class PhotoUser < Photo
-end

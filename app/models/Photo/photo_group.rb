@@ -1,2 +1,0 @@
-class PhotoGroup < Photo
-end
