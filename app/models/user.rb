@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   enum sex: [ :male, :female ]
 
-  # has_many :photos
   has_many :photos, as: :source
 
 end

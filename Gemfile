@@ -26,6 +26,7 @@ gem 'haml'
 gem "therubyracer"
 gem 'thor'
 gem "twitter-bootstrap-rails"
+gem "paperclip"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
