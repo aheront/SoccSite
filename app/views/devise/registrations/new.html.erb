@@ -3,6 +3,24 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+    <div class="field">
+      <%= f.label :first_name%><br />
+      <%= f.text_field :first_name%>
+    </div>
+    <div class="field">
+      <%= f.label :last_name%><br />
+      <%= f.text_field :last_name%><br />
+    </div>
+
+    <div class="field">
+      <%= f.label :sex%><br />
+      <%= f.select :sex, User.sexes.keys.map { |w| [w.humanize, w] }%>
+    </div>
+    <div class="field">
+      <%= f.label :birthday %> <br/>
+      <%= f.date_select(:birthday, :order => [:month, :day, :year]) %>
+    </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
@@ -20,14 +38,11 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
-    <div class="field">
-      <%= f.label :first_name%>
-      <%= f.text_field :first_name%>
 
-    </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <br/>
+    <%= f.submit "Sign up", class:"btn btn-primary" %>
   </div>
 <% end %>
 
