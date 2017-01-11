@@ -24,7 +24,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'haml'
 gem "therubyracer"
-
+gem 'thor'
 gem "twitter-bootstrap-rails"
 
 # Use jquery as the JavaScript library
