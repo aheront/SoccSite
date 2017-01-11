@@ -1,0 +1,2 @@
+class PhotoUser < Photo
+end
