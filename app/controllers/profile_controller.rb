@@ -6,7 +6,13 @@ class ProfileController < ApplicationController
 
   end
   def show
+
     @user=User.find(params[:id])
+    if @user.photo!=nil
+    @avatar=Photo.find(@user.photo)
+    else
+
+      end
   end
   def create
 

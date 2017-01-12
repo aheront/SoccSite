@@ -6,5 +6,5 @@ class User < ApplicationRecord
   enum sex: [ :male, :female ]
 
   has_many :photos, as: :source
-
+  belongs_to :photo
 end
