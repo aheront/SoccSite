@@ -1,7 +1,7 @@
 class ProfileController < ApplicationController
 
   def index
-    @users=User.all
+    @users = User.all
   end
 
   def new
@@ -9,7 +9,7 @@ class ProfileController < ApplicationController
   end
   def show
 
-    @user=User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create
