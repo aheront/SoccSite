@@ -1,7 +1,9 @@
 class ProfileController < ApplicationController
+
   def index
     @users=User.all
   end
+
   def new
 
   end
@@ -12,14 +14,17 @@ class ProfileController < ApplicationController
     @avatar=Photo.find(@user.photo)
     else
 
-      end
+    end
   end
+
   def create
 
   end
+
   def update
 
   end
+
   def destroy
 
   end

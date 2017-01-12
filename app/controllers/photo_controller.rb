@@ -11,7 +11,6 @@ class PhotoController < ApplicationController
   def create
     @photo= current_user.photos.create(photos_params)
    if @photo.save
-
      redirect_to @photo
    else
      render new_photo_path
@@ -25,16 +24,14 @@ class PhotoController < ApplicationController
   def edit
     @photo=Photo.find(params[:id])
   end
-  def update
-    def update
-      @photo =Photo.find(params[:id])
 
+  def update
+      @photo =Photo.find(params[:id])
       if @photo.update(photos_params)
         redirect_to @photo
       else
         render 'edit'
       end
-    end
   end
 
   def destroy
@@ -43,8 +40,11 @@ class PhotoController < ApplicationController
 
     redirect_to photo_index_path
   end
+
   private
+
   def photos_params
     params.require(:photo).permit(:image,:name)
   end
+
 end
