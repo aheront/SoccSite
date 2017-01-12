@@ -1,0 +1,10 @@
+- @users.each do |user|
+  %h2
+    = link_to user.first_name.to_s+' '+user.last_name.to_s, profile_path(user)
+  %p
+    = user.email
+  %p
+    = user.birthday
+  %p
+    = user.sex
+    %hr/

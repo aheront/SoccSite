@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   enum sex: [ :male, :female ]
+  has_many :photos, as: :source
+  belongs_to :photo
 end

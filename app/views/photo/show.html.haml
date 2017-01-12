@@ -1,0 +1,7 @@
+%h1
+  = @photo.name
+  %br
+= image_tag @photo.image.url(:medium)
+%br
+= link_to 'Edit', edit_photo_path(@photo)
+= link_to 'Back', photo_index_path

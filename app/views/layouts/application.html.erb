@@ -49,9 +49,7 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-                <li><%= link_to 'Show profile', profile_path(current_user) %></li>
-                <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> </li>
-                <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+                <li class="text-right"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
                 <% else%>
                 <li><%= link_to 'Registration', new_user_registration_path%></li>
                 <li><%= link_to 'Sign in', new_user_session_path %></li>
@@ -71,10 +69,17 @@
           <div class="well sidebar-nav">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <% if user_signed_in? %>
+                  <li><%= link_to 'Show profile', profile_path(current_user) %></li>
+                  <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> </li>
+                  <li><%= link_to "My photo", photo_index_path  %></li>
+                  <li><%= link_to 'Community', profile_index_path  %></li>
+                  <li><%= link_to "Link2", "/path2"  %></li>
+                  <li><%= link_to "Link3", "/path3"  %></li>
+              <% else%>
+                  <li><%= link_to 'Registration', new_user_registration_path%></li>
+                  <li><%= link_to 'Sign in', new_user_session_path %></li>
+              <% end%>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
