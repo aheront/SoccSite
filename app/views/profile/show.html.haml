@@ -1,5 +1,10 @@
-%h2= @user.first_name+" "+@user.last_name
-%p= @user.email
-%p= @user.birthday
-%p= @user.sex
-= image_tag @avatar.image.url(:thumb)
+.col-lg-4
+  .well.sidebar-nav
+    = image_tag @avatar.image.url(:thumb)
+.col-lg-8
+  .well.sidebar-nav
+    %h2= @user.first_name+" "+@user.last_name
+    %p= @user.email
+    %p= @user.birthday
+    %p= @user.sex
+
