@@ -1,6 +1,9 @@
 .col-lg-4
   .well.sidebar-nav
-    = image_tag @avatar.image.url(:thumb)
+    if @user.photo.present?
+    = image_tag @user.photo.url(:thumb)
+    else
+    = image_tag '/public/images/missing_avatar.png'
 .col-lg-8
   .well.sidebar-nav
     %h2= @user.first_name+" "+@user.last_name
