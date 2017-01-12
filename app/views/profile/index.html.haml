@@ -1,0 +1,10 @@
+- @users.each do |user|
+  %h2
+    = user.first_name.to_s+' '+user.last_name.to_s
+  %p
+    = user.email
+  %p
+    = user.birthday
+  %p
+    = user.sex
+    %hr/
