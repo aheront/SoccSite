@@ -31,10 +31,10 @@
 <div class="field">
   <%= f.fields_for :photo, resource.photo do |p| %>
       <div class="field">
-        <%= p.file_field :photo %>
+        <%= p.hidden_field :id %>
+        <%= p.file_field :image %>
       </div>
   <% end %>
-  <%= f.file_field :image%>
 </div>
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
