@@ -10,4 +10,14 @@
     %p= @user.email
     %p= @user.birthday
     %p= @user.sex
+%br
+  =link_to 'New post', new_post_path
+  .well.sidebar-nav
+    - @user.posts.each do |post|
+      %hr/
+      = link_to 'x', post_path(post),method: :delete
+      %h2= post.name
+      %p= post.text
+
+
 
