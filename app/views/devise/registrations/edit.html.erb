@@ -29,7 +29,11 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 <div class="field">
-
+  <%= f.fields_for :photo, resource.photo do |p| %>
+      <div class="field">
+        <%= p.file_field :photo %>
+      </div>
+  <% end %>
   <%= f.file_field :image%>
 </div>
   <div class="field">
