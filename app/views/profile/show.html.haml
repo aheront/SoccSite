@@ -24,9 +24,7 @@
           - post.photos.each do |photo|
             - if photo.image.present?
               = link_to(image_tag(photo.image.url(:thumb)), photo_path(photo))
-    - else
-      %p
-        .text-center Post not Found
+    
 
 
 

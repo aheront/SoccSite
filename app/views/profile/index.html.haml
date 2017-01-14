@@ -3,8 +3,10 @@
       .row
          .col-lg-4
             -if user.photo.present?
+               %br
                = link_to(image_tag(user.photo.image.url(:thumb)), photo_path(user.photo))
             - else
+               %br
                = image_tag 'missing_avatar.png', size: '200x200'
          .col-lg-8
             %h2
