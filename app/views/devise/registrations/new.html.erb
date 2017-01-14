@@ -20,11 +20,6 @@
       <%= f.label :birthday %> <br/>
       <%= f.date_select(:birthday, :order => [:month, :day, :year]) %>
     </div>
-    <div class="field" id="1">
-      <%= f.fields_for :photos do |p| %>
-            <%= p.file_field :image %>
-      <% end %>
-    </div>
 
   <div class="field">
     <%= f.label :email %><br />
