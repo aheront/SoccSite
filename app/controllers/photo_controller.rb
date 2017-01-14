@@ -1,6 +1,4 @@
 class PhotoController < ApplicationController
-
-
   before_action :load_photo, only: [:show, :update, :edit, :destroy]
 
   def index

@@ -8,7 +8,4 @@ class User < ApplicationRecord
   has_many :posts, as: :source
   belongs_to :photo, optional: true
   accepts_nested_attributes_for :photo
-  #attr_accessible :photo
-
-  # validates :photo_id, :presence => false
 end

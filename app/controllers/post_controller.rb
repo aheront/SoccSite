@@ -13,6 +13,9 @@ class PostController < ApplicationController
   def create
     @post = current_user.posts.create(posts_params)
     if @post.save
+      @ph =  Photo.create(image_params)
+      @ph.source = @post
+      @post.photos << @ph
       redirect_to @post
     else
       render profile_path(current_user)
@@ -31,5 +34,8 @@ class PostController < ApplicationController
 
   def posts_params
     params.require(:post).permit(:name,:text)
+  end
+  def image_params
+    params.require(:post).permit(:image)
   end
 end
