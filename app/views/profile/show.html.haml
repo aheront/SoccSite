@@ -1,13 +1,30 @@
-.col-lg-4
-  .well.sidebar-nav
-    -if @user.photo.present?
-      = image_tag @user.photo.image.url(:thumb)
+%div
+  .row
+    .col-lg-4
+      .well.sidebar-nav
+        -if @user.photo.present?
+          = image_tag @user.photo.image.url(:thumb)
+        - else
+          = image_tag 'missing_avatar.png', size: '200x200'
+    .col-lg-8
+      .well.sidebar-nav
+        %h2= @user.first_name+" "+@user.last_name
+        %p= @user.email
+        %p= @user.birthday
+        %p= @user.sex
+%div
+  .row
+    - if @user.posts.present?
+      - @user.posts.each do |post|
+        .well.sidebar-nav
+          = link_to 'x', post_path(post),method: :delete, class: 'right'
+          %h2= post.name
+          %p= post.text
     - else
-      = image_tag 'missing_avatar.png', size: '200x200'
-.col-lg-8
-  .well.sidebar-nav
-    %h2= @user.first_name+" "+@user.last_name
-    %p= @user.email
-    %p= @user.birthday
-    %p= @user.sex
+      %p
+        .text-center Post not Found
+
+
+
+
 
