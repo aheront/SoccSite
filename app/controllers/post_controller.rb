@@ -13,9 +13,9 @@ class PostController < ApplicationController
   def create
     @post = current_user.posts.create(posts_params)
     if @post.save
-      @ph =  Photo.create(image_params)
-      @ph.source = @post
-      @post.photos << @ph
+      if image_params.present?
+      @post.photos.create(image_params)
+      end
       redirect_to @post
     else
       render profile_path(current_user)
