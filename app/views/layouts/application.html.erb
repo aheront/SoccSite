@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "SoccSite" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "SocSite" %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -31,7 +31,7 @@
 
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+    <%= favicon_link_tag 'logo.png', :rel => 'shortcut icon', :type => 'image/png' %>
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
@@ -45,18 +45,20 @@
     <![endif]-->
   </head>
   <body >
-    <div class="navbar navbar-default navbar-static-top">
+    <div class="navbar navbar-inverse navbar-static-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href=<%= root_path%>>SoccSite</a>
+        <a class="nav navbar-nav" href=<%= root_path%>><%= image_tag 'logo.png', size: '50'%></a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
+
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-                <li class="text-right"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to 'SocSite',root_path%></li>
+                <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete%></li>
                 <% else%>
                 <li><%= link_to 'Registration', new_user_registration_path%></li>
                 <li><%= link_to 'Sign in', new_user_session_path %></li>
@@ -73,7 +75,7 @@
           <%= yield %>
         </div>
         <div class="col-lg-3">
-          <div class="well sidebar-nav">
+          <div class="well sidebar-nav inverse">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">
               <% if user_signed_in? %>
@@ -82,7 +84,6 @@
                   <li><%= link_to "My photo", photo_index_path  %></li>
                   <li><%= link_to 'Community', profile_index_path  %></li>
                   <li><%= link_to 'New post',  new_post_path  %></li>
-                  <li><%= link_to "Link3", "/path3"  %></li>
               <% else%>
                   <li><%= link_to 'Registration', new_user_registration_path%></li>
                   <li><%= link_to 'Sign in', new_user_session_path %></li>
@@ -93,7 +94,7 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2017</p>
+        <p>&copy; SocSite 2017</p>
       </footer>
 
     </div> <!-- /container -->

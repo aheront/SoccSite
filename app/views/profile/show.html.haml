@@ -3,7 +3,7 @@
     .col-lg-4
       .well.sidebar-nav
         -if @user.photo.present?
-          = image_tag @user.photo.image.url(:thumb)
+          = link_to(image_tag(@user.photo.image.url(:thumb)), photo_path(@user.photo))
         - else
           = image_tag 'missing_avatar.png', size: '200x200'
     .col-lg-8
@@ -16,13 +16,22 @@
   .row
     - if @user.posts.present?
       - @user.posts.each do |post|
+        = link_to '', post_path(post),method: :delete, class: 'glyphicon glyphicon-remove'
         .well.sidebar-nav
-          = link_to 'x', post_path(post),method: :delete, class: 'right'
-          %h2= post.name
+          %h1
+            = link_to post.name, post
           %p= post.text
-    - else
-      %p
-        .text-center Post not Found
+          - post.photos.each do |photo|
+            - if photo.image.present?
+              = link_to(image_tag(photo.image.url(:thumb)), photo_path(photo))
+              %br
+          %br
+            = form_for :like, url: post_path(post), method: :patch, html: { multipart: true } do |f|
+              = f.hidden_field :source =>  post
+              = f.submit '',id:'like', :type => :image, :src => image_path('loys.png')
+            = (''+post.likes.count.to_s+' Likes')
+
+
 
 
 

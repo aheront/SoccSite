@@ -1,6 +1,4 @@
 class PhotoController < ApplicationController
-  before_action :authenticate_user!
-
   before_action :load_photo, only: [:show, :update, :edit, :destroy]
 
   def index
@@ -27,11 +25,8 @@ class PhotoController < ApplicationController
   end
 
   def update
-      if @photo.update(photos_params)
-        redirect_to @photo
-      else
-        render 'edit'
-      end
+    @photo.likes.create(user:current_user)
+    redirect_to @photo if @photo.save
   end
 
   def destroy

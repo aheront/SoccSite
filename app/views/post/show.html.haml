@@ -2,5 +2,9 @@
   = @post.name
   %br
 %p= @post.text
+- if @post.photos.present?
+  - @post.photos.each do |photo|
+    - if photo.image.present?
+      = link_to(image_tag(photo.image.url(:medium)), photo_path(photo))
 %br
 = link_to 'Back', profile_path(current_user)
