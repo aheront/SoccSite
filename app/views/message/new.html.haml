@@ -1,0 +1,12 @@
+%h1 New message
+= form_for @message, url: '/message', method: :post, html: { multipart: true } do |f|
+  = f.label 'To'
+  %br
+  = f.select :user_id,  User.all.collect { |p| [ p.first_name+' '+p.last_name, p.id ] }
+  %br
+  = f.label 'Message'
+  %br
+  = f.text_field :message_text
+  %br
+  = f.submit 'Send'
+  = link_to 'Back', message_index_path

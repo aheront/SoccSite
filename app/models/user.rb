@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :posts, as: :source
   belongs_to :photo, optional: true
   accepts_nested_attributes_for :photo
+  has_many :messages
 end
