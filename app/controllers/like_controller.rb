@@ -5,7 +5,7 @@ class LikeController < ApplicationController
   end
 
   def new
-    @like=Like.new
+    @like = Like.new
   end
 
   def show
@@ -14,8 +14,6 @@ class LikeController < ApplicationController
   def create
     if @like.save
       redirect_to @like.source
-    else
-
     end
   end
 
