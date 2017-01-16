@@ -14,7 +14,7 @@ class PostController < ApplicationController
     @post = current_user.posts.create(posts_params)
     if @post.save
       if image_params.present?
-      @post.photos.create(image_params)
+        @post.photos.create(image_params)
       end
       redirect_to @post
     else
@@ -23,10 +23,7 @@ class PostController < ApplicationController
   end
   def update
     @post.likes.create(user:current_user)
-    if @post.save
-      redirect_to @post
-    end
-
+    redirect_to @post if @post.save
   end
 
   def destroy

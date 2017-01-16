@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     resource.save
     if image_params.present?
-    resource.photo = resource.photos.create(image_params)
+      resource.photo = resource.photos.create(image_params)
     end
     yield resource if block_given?
     if resource.persisted?

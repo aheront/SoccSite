@@ -26,9 +26,7 @@ class PhotoController < ApplicationController
 
   def update
     @photo.likes.create(user:current_user)
-      if @photo.save
-        redirect_to @photo
-      end
+    redirect_to @photo if @photo.save
   end
 
   def destroy
