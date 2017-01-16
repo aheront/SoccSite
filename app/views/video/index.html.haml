@@ -1,0 +1,8 @@
+= link_to 'New video', new_video_path
+%br
+- current_user.videos.each do |video|
+  = video.name
+  = link_to '', video_path(video),method: :delete, class: 'glyphicon glyphicon-remove'
+  %br
+  = video_tag(video.file.url,  controls: true,size:'700x400')
+  %br

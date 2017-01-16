@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :audio
 
+  resources :video
+
   resources :message
 
   resources :post

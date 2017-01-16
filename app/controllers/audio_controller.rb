@@ -1,5 +1,5 @@
 class AudioController < ApplicationController
-  before_action :load_audio, only: [:show, :destroy]
+  before_action :load_audio, only: :destroy
 
   def index
     @audios = current_user.audios
@@ -16,9 +16,6 @@ class AudioController < ApplicationController
     else
       render new_audio_path
     end
-  end
-
-  def show
   end
 
   def destroy
