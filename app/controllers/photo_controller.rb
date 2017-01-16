@@ -25,10 +25,9 @@ class PhotoController < ApplicationController
   end
 
   def update
-      if @photo.update(photos_params)
+    @photo.likes.create(user:current_user)
+      if @photo.save
         redirect_to @photo
-      else
-        render 'edit'
       end
   end
 

@@ -1,7 +1,7 @@
 class PostController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :load_post, only: [:show, :destroy]
+  before_action :load_post, only: [:show, :destroy,:update]
 
   def new
     @post = Post.new
@@ -20,6 +20,13 @@ class PostController < ApplicationController
     else
       render profile_path(current_user)
     end
+  end
+  def update
+    @post.likes.create(user:current_user)
+    if @post.save
+      redirect_to @post
+    end
+
   end
 
   def destroy
