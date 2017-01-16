@@ -3,7 +3,7 @@
 = form_for :like, url: photo_path(@photo), method: :patch, html: { multipart: true } do |f|
   = f.hidden_field :source =>  @photo
   = f.submit "", :type => :image, :src => image_path("loys.png")
-  = @photo.likes.count
+= (''+@photo.likes.count.to_s+' Likes')
 %br
 = image_tag @photo.image.url(:medium)
 %br
