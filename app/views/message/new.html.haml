@@ -2,7 +2,7 @@
 = form_for @message, url: '/message', method: :post, html: { multipart: true } do |f|
   = f.label 'To'
   %br
-  = f.select :user_id,  User.all.collect { |p| [ p.first_name+' '+p.last_name, p.id ] }
+  = f.select :user_id,  User.all.collect { |p| [ p.first_name + ' ' + p.last_name, p.id ] }
   %br
   = f.label 'Message'
   %br

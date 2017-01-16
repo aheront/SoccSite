@@ -6,7 +6,7 @@ class MessageController < ApplicationController
   end
 
   def new
-    @message=Message.new
+    @message = Message.new
   end
 
   def show
@@ -14,7 +14,6 @@ class MessageController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-   # @message.user_id = current_user.id
     @message.user_from = current_user.id
     if @message.save
       redirect_to message_index_path
