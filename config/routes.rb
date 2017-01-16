@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
   }
 
+  resources :audio
+
   resources :message
 
   resources :post

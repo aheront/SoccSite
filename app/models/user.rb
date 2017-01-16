@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   enum sex: [ :male, :female ]
   has_many :photos, as: :source
+  has_many :audios, as: :source
   has_many :posts, as: :source
   belongs_to :photo, optional: true
   accepts_nested_attributes_for :photo

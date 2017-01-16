@@ -1,0 +1,9 @@
+= link_to 'New audio', new_audio_path
+%br
+- current_user.audios.each do |audio|
+  = audio.name
+  = link_to '', audio_path(audio),method: :delete, class: 'glyphicon glyphicon-remove'
+  %br
+  = audio_tag(audio.sound.url,  controls: true)
+  %br
+
