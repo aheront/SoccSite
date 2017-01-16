@@ -6,5 +6,10 @@
   %p
     = @message.message_text
   %br
+    - if @message.photos.present?
+      - @message.photos.each do |photo|
+        - if photo.image.present?
+          = link_to(image_tag(photo.image.url(:medium)), photo_path(photo))
+    %br
     = link_to 'Delete', message_path(@message),method: :delete
     = link_to 'Back', message_index_path
