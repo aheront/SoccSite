@@ -1,8 +1,8 @@
 %h1 New audios
-= form_for @audio, url: '/audios', method: :post, html: { multipart: true } do |f|
+= form_for [@res, @audio] do |f|
+  = f.label :audio
+    %br
   = f.file_field :sound
-  = f.label :name
-  %br
-  = f.text_field :name
   %br
   = f.submit 'Upload'
+= link_to 'Back', user_path(current_user)

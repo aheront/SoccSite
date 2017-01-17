@@ -4,6 +4,7 @@ class AudiosController < ApplicationController
   before_action :res_params
 
   def index
+    @res = res_params
     @audios = current_user.audios
   end
 
@@ -12,9 +13,9 @@ class AudiosController < ApplicationController
   end
 
   def create
-    @audio = current_user.audios.create(audios_params)
+    @audio = res_params.audios.create(audios_params)
     if @audio.save
-      redirect_to audio_index_path
+      redirect_to user_audios_path(current_user.id)
     else
       render new_audio_path
     end
@@ -22,7 +23,7 @@ class AudiosController < ApplicationController
 
   def destroy
     @audio.destroy
-    redirect_to audio_index_path
+    redirect_to res_params
   end
   private
 
@@ -31,8 +32,9 @@ class AudiosController < ApplicationController
   end
 
   def audios_params
-    params.require(:audios).permit(:sound, :name)
+    params.require(:audio).permit(:sound)
   end
+
   def res_params
     if params[:user_id].nil?
       @res = Group.find(params[:group_id])

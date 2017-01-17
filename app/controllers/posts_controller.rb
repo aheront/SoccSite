@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       end
       redirect_to url_for([res_params,@post])
     else
-      render user_path(current_user)
+      render redirect_to res_params
     end
   end
   def update

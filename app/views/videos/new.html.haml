@@ -1,8 +1,7 @@
 %h1 New video
 = form_for @video, url: '/videos', method: :post, html: { multipart: true } do |f|
-  = f.file_field :file
-  = f.label :name
+  = f.label :video
   %br
-  = f.text_field :name
+  = f.file_field :file
   %br
   = f.submit 'Upload'
