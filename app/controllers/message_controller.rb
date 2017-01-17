@@ -4,7 +4,7 @@ class MessageController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @messages = Message.where("user_id = ? OR user_from = ?", current_user.id, current_user.id)
+    @messages = Message.where("user_id = ? OR user_from = ?", current_user.id, current_user.id).order(created_at: :desc)
   end
 
   def new

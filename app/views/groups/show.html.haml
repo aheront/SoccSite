@@ -1,0 +1,31 @@
+%div
+  .row
+    .col-lg-4
+      .well.sidebar-nav
+        - @group.photos.each do |photo|
+          - if photo.image.present?
+            = link_to(image_tag(photo.image.url(:thumb)),url_for([@group, photo]))
+          - else
+            = image_tag 'missing_avatar.png', size: '200x200'
+    .col-lg-8
+      .well.sidebar-nav
+        %h1= @group.name
+%div
+  .row
+    = link_to 'New posts', new_group_post_path(@group)
+    - if @group.posts.present?
+      - @group.posts.each do |post|
+        = link_to '',group_post_path(@group,post),method: :delete, class: 'glyphicon glyphicon-remove'
+        .well.sidebar-nav
+          %h1
+            = link_to post.name, group_post_path(@group,post)
+          %p= post.text
+          - post.photos.each do |photo|
+            - if photo.image.present?
+              = link_to(image_tag(photo.image.url(:thumb)), url_for([@group,post, photo]))
+              %br
+          %br
+            = form_for :like, url: group_post_path(@group,post), method: :patch, html: { multipart: true } do |f|
+              = f.hidden_field :source =>  post
+              = f.submit '',id:'likes', :type => :image, :src => image_path('loys.png')
+            = (''+post.likes.count.to_s+' Likes')

@@ -230,7 +230,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer
-  thor
+  thor (~> 0.19.1)
   turbolinks (~> 5)
   twitter-bootstrap-rails
   tzinfo-data

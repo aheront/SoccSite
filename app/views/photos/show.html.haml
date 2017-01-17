@@ -1,0 +1,11 @@
+%h1
+  = @photo.name
+= form_for :like, url: url_for([@res, @photo]), method: :patch, html: { multipart: true } do |f|
+  = f.hidden_field :source =>  @photo
+  = f.submit "", :type => :image, :src => image_path("loys.png")
+= (''+@photo.likes.count.to_s+' Likes')
+%br
+= image_tag @photo.image.url(:medium)
+%br
+= link_to 'Delete', url_for([@res, @photo]),method: :delete
+= link_to 'Back', url_for([@res])

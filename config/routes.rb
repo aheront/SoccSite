@@ -1,24 +1,38 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: {
-      registrations: 'users/registrations'
+      registrations: 'users/registrations',
   }
 
-  resources :audio
+  resources :groups do
+    resources :posts do
+      resources :audios
+      resources :videos
+      resources :photos
+    end
+    resources :audios
+    resources :videos
+    resources :photos
+  end
 
-  resources :video
-
-  resources :message
-
-  resources :post
-
-  resources :photo
-
-  resources :profile
+  resources :users do
+    resources :posts do
+      resources :audios
+      resources :videos
+      resources :photos
+    end
+    resources :audios
+    resources :videos
+    resources :photos
+  end
 
   resources :home
+  resources :message do
+    resources :audios
+    resources :videos
+    resources :photos
+  end
 
-  resources :like
 
   root to: 'home#index'
 

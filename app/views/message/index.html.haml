@@ -9,3 +9,5 @@
       =  'From: '+ User.find(message.user_from).first_name + ' ' + User.find(message.user_from).last_name
     %p
       = link_to message.message_text, message_path(message)
+    %p
+      = message.created_at.in_time_zone('Europe/Kiev')

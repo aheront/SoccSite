@@ -27,7 +27,7 @@ end
 gem 'devise'
 gem 'haml'
 gem "therubyracer"
-gem 'thor'
+gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"
 gem "paperclip"
 
@@ -43,7 +43,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# gem 'capistrano-rails', groups: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

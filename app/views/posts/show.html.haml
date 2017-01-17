@@ -1,0 +1,10 @@
+%h1
+  = @post.name
+  %br
+%p= @post.text
+- if @post.photos.present?
+  - @post.photos.each do |photo|
+    - if photo.image.present?
+      = image_tag(photo.image.url(:medium))
+%br
+= link_to 'Back', url_for([@res])

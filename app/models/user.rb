@@ -11,4 +11,5 @@ class User < ApplicationRecord
   belongs_to :photo, optional: true
   accepts_nested_attributes_for :photo
   has_many :messages
+  has_many :groups, through: :user_to_groups
 end
