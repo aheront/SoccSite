@@ -3,9 +3,34 @@
     .col-lg-4
       .well.sidebar-nav
         -if @user.photo.present?
-          = link_to(image_tag(@user.photo.image.url(:thumb)), user_photo_path(@user,@user.photo))
+          .text-center
+            = link_to(image_tag(@user.photo.image.url(:thumb)), user_photo_path(@user,@user.photo))
         - else
-          = image_tag 'missing_avatar.png', size: '200x200'
+          .text-center
+            = image_tag 'missing_avatar.png', size: '200x200'
+        %br
+        - if @user.id!=current_user.id
+          %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
+          "data-toggle" => "modal", :type => "button"} New message
+          #myModal.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                  %h4.modal-title New message
+                .modal-body
+                  = form_for Message.new, url: '/message', method: :post, html: { multipart: true } do |f|
+                    = f.hidden_field :user_id, value: @user.id
+                    = f.label @user.first_name + ' ' + @user.last_name.to_s
+                    %br
+                    = f.label 'Message'
+                    = f.text_area :message_text,size: '65x10'
+                    = f.file_field :image
+                    %br
+                    .modal-footer
+                      = f.submit 'Send',:class => 'btn btn-default'
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
     .col-lg-8
       .well.sidebar-nav
         %h2= @user.first_name+" "+@user.last_name
@@ -16,7 +41,8 @@
   .row
     - if @user.posts.present?
       - @user.posts.each do |post|
-        = link_to '', user_post_path(@user,post),method: :delete, class: 'glyphicon glyphicon-remove'
+        .center-block
+          = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove '
         .well.sidebar-nav
           %h1
             = link_to post.name, user_post_path(@user,post)

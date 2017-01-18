@@ -10,6 +10,8 @@
       - @message.photos.each do |photo|
         - if photo.image.present?
           = image_tag(photo.image.url(:medium))
+    %p
+      = @message.created_at.in_time_zone('Europe/Kiev')
     %br
     = link_to 'Delete', message_path(@message),method: :delete
     = link_to 'Back', message_index_path
