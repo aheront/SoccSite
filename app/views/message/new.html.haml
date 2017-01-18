@@ -8,15 +8,24 @@
   %br
   = f.text_area :message_text,size: '80x10'
   %br
-  = f.file_field :image
+  = f.file_field :image,id:'pictureInput'
+  #target
   %br
   = f.submit 'Send'
   = link_to 'Back', message_index_path
   :javascript
-      var el = document.getElementById("message_image");
-      el.onclick = function() {
-      var div = document.createElement('div');
-      div.innerHTML = '<input name="message[image]" id="message_image" type="file">';
-
-      document.getElementById("new_message").appendChild(div);
-      };
+      $(function() {
+      $('#pictureInput').on('change', function(event) {
+      var files = event.target.files;
+      var image = files[0]
+      var reader = new FileReader();
+      reader.onload = function(file) {
+      var img = new Image();
+      console.log(file);
+      img.src = file.target.result;
+      $('#target').html(img);
+      }
+      reader.readAsDataURL(image);
+      console.log(files);
+      });
+      });
