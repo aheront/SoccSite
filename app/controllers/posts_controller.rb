@@ -25,12 +25,6 @@ class PostsController < ApplicationController
     end
   end
   def update
-    if @post.likes(user:current_user).exists?
-       @post.likes(user:current_user).delete
-    else
-       @post.likes.create(user:current_user)
-    end
-    redirect_to res_params if @post.save
   end
 
   def destroy

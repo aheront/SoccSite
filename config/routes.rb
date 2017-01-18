@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :audios
       resources :videos
       resources :photos
+      resources :likes
     end
     resources :audios
     resources :videos
@@ -20,10 +21,13 @@ Rails.application.routes.draw do
       resources :audios
       resources :videos
       resources :photos
+      resources :likes
     end
     resources :audios
     resources :videos
-    resources :photos
+    resources :photos do
+      resources :likes
+    end
   end
 
   resources :home

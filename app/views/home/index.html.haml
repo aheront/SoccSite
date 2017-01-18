@@ -1,23 +1,6 @@
 - if user_signed_in?
   %h1
     Welcome #{current_user.first_name}
-    %div
-  .row
-    - if @posts.present?
-      - @posts.each do |post|
-        .well.sidebar-nav
-          %h1
-            = link_to post.name,  user_post_path(post.source_id,post)
-          %p= post.text
-          - post.photos.each do |photo|
-            - if photo.image.present?
-              = link_to(image_tag(photo.image.url(:thumb)), user_post_photo_path(current_user,post,photo))
-              %br
-          %br
-            = form_for :like, url: user_post_path(current_user,post), method: :patch, html: { multipart: true } do |f|
-              = f.hidden_field :source =>  post
-              = f.submit '',id:'like', :type => :image, :src => image_path('loys.png')
-            = (''+post.likes.count.to_s+' Likes')
 - else
   %h1 Welcome new User
 

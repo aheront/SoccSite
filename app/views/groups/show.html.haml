@@ -25,7 +25,8 @@
               = link_to(image_tag(photo.image.url(:thumb)), url_for([@group,post, photo]))
               %br
           %br
-            = form_for :like, url: group_post_path(@group,post), method: :patch, html: { multipart: true } do |f|
+            = form_for :like, url: group_post_likes_path(@group,post), method: :post, html: { multipart: true },remote:true do |f|
               = f.hidden_field :source =>  post
-              = f.submit '',id:'likes', :type => :image, :src => image_path('loys.png')
+              = f.submit '', :type => :image, :src => image_path('loys.png')
             = (''+post.likes.count.to_s+' Likes')
+
