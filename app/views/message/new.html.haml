@@ -6,7 +6,8 @@
   %br
   = f.label 'Message'
   %br
-  = f.text_area :message_text,size: '80x10'
+    %p.emoji-picker-container{:size => "6"}
+      = f.text_area :message_text,:size => '80x10', data: { emojiable: true }
   %br
   = f.file_field :image,id:'pictureInput'
   #target

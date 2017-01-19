@@ -4,7 +4,8 @@
   %h4
     = link_to 'From: '+ User.find(@message.user_from).first_name + ' ' + User.find(@message.user_from).last_name,user_path(User.find(@message.user_from))
   %p
-    = @message.message_text
+    = content_with_emoji(@message.message_text.html_safe)
+
   %br
     - if @message.photos.present?
       - @message.photos.each do |photo|
