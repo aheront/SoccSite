@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
+
   describe User do
     before(:all) do
       @user = User.new(:email=>'example@example.ex',:first_name=>'david',:last_name=>'dady',

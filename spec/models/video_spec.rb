@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Video, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
+  
   describe Video do
     before(:all) do
       @video = Video.new(:source=>User.new)
