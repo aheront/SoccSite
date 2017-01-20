@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   resources :home
+
   resources :message do
     resources :audios
     resources :videos

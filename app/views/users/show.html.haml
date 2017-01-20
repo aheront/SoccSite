@@ -24,7 +24,8 @@
                     = f.label @user.first_name + ' ' + @user.last_name.to_s
                     %br
                     = f.label 'Message'
-                    = f.text_area :message_text,size: '65x10'
+                    %p.emoji-picker-container{:size => "6"}
+                      = f.text_area :message_text,:size => '80x10', data: { emojiable: true }
                     = f.file_field :image
                     %br
                     .modal-footer

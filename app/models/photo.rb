@@ -4,5 +4,5 @@ class Photo < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   has_many :users
   has_many :groups
-  has_many :likes, as: :source
+  has_many :likes, as: :source,dependent: :destroy
 end

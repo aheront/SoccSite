@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       end
       redirect_to url_for([res_params,@post])
     else
-      render redirect_to res_params
+      render 'posts/new'
     end
   end
   def update

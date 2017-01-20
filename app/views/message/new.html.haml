@@ -6,7 +6,7 @@
   %br
   = f.label 'Message'
   %br
-    %p.emoji-picker-container{:size => "6"}
+    %p.emoji-picker-container
       = f.text_area :message_text,:size => '80x10', data: { emojiable: true }
   %br
   = f.file_field :image,id:'pictureInput'
@@ -14,19 +14,3 @@
   %br
   = f.submit 'Send'
   = link_to 'Back', message_index_path
-  :javascript
-      $(function() {
-      $('#pictureInput').on('change', function(event) {
-      var files = event.target.files;
-      var image = files[0]
-      var reader = new FileReader();
-      reader.onload = function(file) {
-      var img = new Image();
-      console.log(file);
-      img.src = file.target.result;
-      $('#target').html(img);
-      }
-      reader.readAsDataURL(image);
-      console.log(files);
-      });
-      });
