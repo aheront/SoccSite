@@ -1,14 +1,15 @@
 %h1 New posts
-= form_for [@res, @post] do |f|
+= form_for [@res, @post],class:'form-group' do |f|
   = f.label :name
   %br
-  = f.text_field :name
+  = f.text_field :name,class:'form-control'
   %br
   = f.label :text
   %br
-  = f.text_area :text,size: '80x10'
+  = f.text_area :text,size: '80x10',class:'form-control'
   %br
-    = f.file_field :image
+    .form-group
+      = f.file_field :image,class:'form-control-file'
   %br
-    = f.submit'Create'
-= link_to 'Back', user_path(current_user)
+    = f.submit'Create',class:'btn btn-primary'
+    = link_to 'Back', user_path(current_user),class:'btn btn-default'

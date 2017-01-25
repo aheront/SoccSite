@@ -1,8 +1,8 @@
 %h1 New audios
 = form_for [@res, @audio] do |f|
-  = f.label :audio
+  = f.label :audio,class:'text'
   %br
   = f.file_field :sound
   %br
-  = f.submit 'Upload'
-= link_to 'Back', user_path(current_user)
+  = f.submit 'Upload',class:'btn btn-primary'
+  = link_to 'Back', user_path(current_user),class:'btn btn-default'

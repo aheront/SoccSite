@@ -8,6 +8,7 @@
     %h4
       =  'From: '+ User.find(message.user_from).first_name + ' ' + User.find(message.user_from).last_name
     %p
-      = link_to content_with_emoji(message.message_text.html_safe), message_path(message),size:'20x20'
+      = link_to content_with_emoji(message.message_text.html_safe.truncate(255)), message_path(message),size:'20x20'
     %p
+      Time send:
       = message.created_at.in_time_zone('Europe/Kiev')

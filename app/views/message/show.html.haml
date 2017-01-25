@@ -12,7 +12,8 @@
         - if photo.image.present?
           = image_tag(photo.image.url(:medium))
     %p
+      Time send:
       = @message.created_at.in_time_zone('Europe/Kiev')
     %br
-    = link_to 'Delete', message_path(@message),method: :delete
-    = link_to 'Back', message_index_path
+    = link_to 'Delete', message_path(@message),method: :delete,class:'btn btn-danger'
+    = link_to 'Back', message_index_path,class:'btn btn-default'

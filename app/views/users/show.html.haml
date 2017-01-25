@@ -47,7 +47,7 @@
         .well.sidebar-nav
           %h1
             = link_to post.name, user_post_path(@user,post)
-          %p= post.text
+          %p= post.text.truncate(255)
           - post.photos.each do |photo|
             - if photo.image.present?
               = link_to(image_tag(photo.image.url(:thumb)), url_for([@user,post,photo]))

@@ -2,11 +2,11 @@
 = form_for @group, url: '/groups', method: :post, html: { multipart: true } do |f|
   = f.label :name
   %br
-  = f.text_field :name
+  = f.text_field :name,class:'form-control'
   %br
   = f.label :image
   %br
   = f.file_field :image
   %br
-  = f.submit 'Create'
-= link_to 'Back', user_path(current_user)
+  = f.submit 'Create',class:'btn btn-primary'
+  = link_to 'Back', user_path(current_user),class:'btn btn-default'
