@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :update]
 
   before_action :load_group, only: [:show, :destroy,:update]
 

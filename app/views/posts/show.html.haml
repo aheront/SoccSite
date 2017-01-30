@@ -12,7 +12,7 @@
 %p#id1
   = (''+@post.likes.count.to_s+' Likes')
 %br
-= link_to 'Back', url_for([@res])
+= link_to 'Back', :back,class:'btn btn-default'
 :javascript
   var div = document.getElementById('id')
   document.getElementById("id1").appendChild(div);
