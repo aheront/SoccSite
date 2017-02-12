@@ -22,7 +22,6 @@ class LikesController < ApplicationController
     else
     if @like.save
       redirect_to url_for([@res,@res1])
-
     end
     end
   end

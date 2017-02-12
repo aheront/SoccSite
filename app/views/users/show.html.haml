@@ -1,7 +1,7 @@
 %div
   .row
-    .col-lg-4
-      .well.sidebar-nav
+    .col-lg-4{ class: 'panel panel-default'}
+      %div{ class: 'panel-body'}
         -if @user.photo.present?
           .text-center
             = link_to(image_tag(@user.photo.image.url(:thumb)), user_photo_path(@user,@user.photo))
@@ -9,7 +9,7 @@
           .text-center
             = image_tag 'missing_avatar.png', size: '200x200'
         %br
-        - if @user.id!=current_user.id
+        - if @user!=current_user
           %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
           "data-toggle" => "modal", :type => "button"} New message
           #myModal.modal.fade
@@ -31,31 +31,51 @@
                     .modal-footer
                       = f.submit 'Send',:class => 'btn btn-default'
                       %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-
-    .col-lg-8
-      .well.sidebar-nav
+        - else
+          %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
+          "data-toggle" => "modal", :type => "button"} Edit avatar
+          #myModal.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                  %h4.modal-title Edit avatar
+                .modal-body
+                  = form_for Photo.new, url:new_avatar_user_path(current_user.id), method: :post, html: { multipart: true } do |f|
+                    = f.file_field :image
+                    %br
+                    .modal-footer
+                      = f.submit 'Edit',:class => 'btn btn-default'
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    .col-lg-8{ class: 'panel panel-default'}
+      %div{ class: 'panel-body'}
         %h2= @user.first_name+" "+@user.last_name
         %p= @user.email
         %p= @user.birthday
         %p= @user.sex
+        %h4
+          Photo:
+        - @user.photos.first(5).each do |p|
+          = link_to(image_tag(p.image.url(:thumb), width:'100'), url_for([@user,p]))
+
 %div
   .row
-    - if @user.posts.present?
-      - @user.posts.each do |post|
-        .center-block
-          = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove '
-        .well.sidebar-nav
-          %h1
-            = link_to post.name, user_post_path(@user,post)
-          %p= post.text.truncate(255)
-          - post.photos.each do |photo|
-            - if photo.image.present?
-              = link_to(image_tag(photo.image.url(:thumb)), url_for([@user,post,photo]))
-              %br
-          %br
-            = form_for :like, url: user_post_likes_path(@user,post), method: :post, html: { multipart: true } do |f|
-              = f.hidden_field :source =>  post
-              = f.submit '', :type => :image, :src => image_path('loys.png')
+    .col-lg-4{ class: 'panel panel-default',style:'padding:15px;'}
+      %div{ class: 'panel-body'}
+    .col-lg-8{ class: 'panel panel-default',style:'padding:15px;'}
+      %div{ class: 'panel-body'}
+        - if @user.posts.present?
+          - @user.posts.each do |post|
+            = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
+            %h2
+              = link_to post.name, user_post_path(@user,post)
+            %p= post.text.truncate(255)
+            - post.photos.each do |photo|
+              - if photo.image.present?
+                = link_to(image_tag(photo.image.url(:medium)), url_for([@user,post,photo]))
+                %br
+            %br
+              = link_to image_tag('loys.png'), like_user_post_path(@user,post)
               = (''+post.likes.count.to_s+' Likes')
 
 

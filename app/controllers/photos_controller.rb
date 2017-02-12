@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :load_photo, only: [:show, :update, :edit, :destroy]
+  before_action :load_photo, only: [:show, :update, :edit, :destroy,:like,:dislike,:edit_avatar]
 
   before_action :res_params
 
@@ -21,6 +21,7 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @user = res_params
   end
 
   def edit
@@ -34,10 +35,33 @@ class PhotosController < ApplicationController
     redirect_to res_params
   end
 
+  def like
+    if Like.find_by(source:@photo,user:current_user).nil?
+    @photo.likes.create(user:current_user)
+    redirect_to user_photo_path(res_params,@photo)
+    else
+      dislike
+    end
+  end
+  def dislike
+    @photo.likes.where(user:current_user).first.delete
+    redirect_to user_photo_path(res_params,@photo)
+  end
+  def edit_avatar
+    if res_params == current_user
+      current_user.photo = @photo
+      current_user.save
+      redirect_to current_user
+    else
+      current_user.photo = current_user.photos.create(image:@photo.image)
+      current_user.save
+      redirect_to current_user
+    end
+  end
   private
 
   def load_photo
-    @photo = res_params.photos.find(params[:id])
+    @photo = Photo.find(params[:id])
     @res = res_params
   end
 
@@ -50,6 +74,9 @@ class PhotosController < ApplicationController
     else
       @res = User.find(params[:user_id])
     end
+  end
+  def photo_params
+    @res = Photo.find(params[:photo_id])
   end
 
 end

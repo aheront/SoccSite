@@ -4,19 +4,19 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def new
+  def new_avatar
+    current_user.photo = current_user.photos.create(image_params)
+    current_user.save
+    redirect_to current_user
   end
+
 
   def show
     @user = User.find(params[:id])
   end
 
-  def create
-  end
-
-  def update
-  end
-
-  def destroy
+  private
+  def image_params
+    params.require(:photo).permit(:image)
   end
 end

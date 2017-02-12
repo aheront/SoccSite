@@ -6,13 +6,8 @@
   - @post.photos.each do |photo|
     - if photo.image.present?
       = image_tag(photo.image.url(:medium))
-= form_for :like, url: user_post_likes_path(@res,@post), method: :post, html: { multipart: true },remote:true do |f|
-  = f.hidden_field :source =>  @post
-  = f.submit '', :type => :image, :src => image_path('loys.png')
-%p#id1
-  = (''+@post.likes.count.to_s+' Likes')
+%p
+  = link_to image_tag('loys.png'), like_user_post_path(@user,@post)
+  = (''+@post.likes.size.to_s+' Likes')
 %br
 = link_to 'Back', :back,class:'btn btn-default'
-:javascript
-  var div = document.getElementById('id')
-  document.getElementById("id1").appendChild(div);

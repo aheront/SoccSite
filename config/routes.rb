@@ -9,11 +9,15 @@ Rails.application.routes.draw do
       resources :audios
       resources :videos
       resources :photos
-      resources :likes
+      get :like, on: :member
+      get :dislike, on: :member
     end
     resources :audios
     resources :videos
-    resources :photos
+    resources :photos do
+      get :like, on: :member
+      get :dislike, on: :member
+    end
   end
 
   resources :users do
@@ -21,12 +25,17 @@ Rails.application.routes.draw do
       resources :audios
       resources :videos
       resources :photos
-      resources :likes
+      get :like, on: :member
+      get :dislike, on: :member
     end
+    post :new_avatar, on: :member
+
     resources :audios
     resources :videos
     resources :photos do
-      resources :likes
+      post :edit_avatar, on: :member
+      get :like, on: :member
+      get :dislike, on: :member
     end
   end
 
