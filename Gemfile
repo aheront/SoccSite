@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -91,7 +91,7 @@ group :development, :test do
 end
 gem 'devise'
 gem 'haml'
-gem 'mysql2'
+
 gem "therubyracer"
 gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"
@@ -134,4 +134,4 @@ group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
-
+ruby '2.3.3'
