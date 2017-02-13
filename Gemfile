@@ -91,7 +91,7 @@ group :development, :test do
 end
 gem 'devise'
 gem 'haml'
-
+gem 'mysql2'
 gem "therubyracer"
 gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"
