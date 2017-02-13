@@ -12,7 +12,7 @@
         - if @user!=current_user
           %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
           "data-toggle" => "modal", :type => "button"} New message
-          #myModal.modal.fade
+          #myModal1.modal.fade
             .modal-dialog
               .modal-content
                 .modal-header
@@ -34,19 +34,19 @@
         - else
           %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
           "data-toggle" => "modal", :type => "button"} Edit avatar
-            #myModal.modal.fade
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    %button.close{"data-dismiss" => "modal", :type => "button"} ×
-                    %h4.modal-title Edit avatar
-                  .modal-body
-                    = form_for Photo.new, url:new_avatar_user_path(current_user.id), method: :post, html: { multipart: true } do |f|
-                      = f.file_field :image
-                      %br
-                      .modal-footer
-                        = f.submit 'Edit',:class => 'btn btn-default'
-                        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+          #myModal.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                  %h4.modal-title Edit avatar
+                .modal-body
+                  = form_for Photo.new, url:new_avatar_user_path(current_user.id), method: :post, html: { multipart: true } do |f|
+                    = f.file_field :image
+                    %br
+                    .modal-footer
+                      = f.submit 'Edit',:class => 'btn btn-default'
+                      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
     .col-lg-8{ class: 'panel panel-default'}
       %div{ class: 'panel-body'}
         %h2= @user.first_name+" "+@user.last_name
