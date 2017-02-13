@@ -13,7 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 .idea/*
-/public/*
 .idea/
 
 # Ignore Byebug command history file.
