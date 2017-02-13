@@ -1,0 +1,16 @@
+%h1 New message
+= form_for @message, url: '/message', method: :post, html: { multipart: true,class:'form' } do |f|
+  = f.label 'To'
+  %br
+  = f.select :user_id,  User.all.collect { |p| [ p.first_name + ' ' + p.last_name, p.id ] }
+  %br
+  = f.label 'Message'
+  %br
+    %p.emoji-picker-container
+      = f.text_area :message_text,:size => '80x10', data: { emojiable: true }
+  %br
+  = f.file_field :image,id:'pictureInput'
+  #target
+  %br
+  = f.submit 'Send',class:'btn btn-primary'
+  = link_to 'Back', :back,class:'btn btn-default'

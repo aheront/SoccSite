@@ -1,0 +1,10 @@
+= link_to 'New audio', new_user_audio_path(current_user.id)
+%br
+- @res.audios.each do |audio|
+  %br
+  = audio.sound_file_name
+  = link_to '', user_audio_path(@res,audio),method: :delete, class: 'glyphicon glyphicon-remove'
+  %br
+  = audio_tag(audio.sound.url,  controls: true)
+  %br
+

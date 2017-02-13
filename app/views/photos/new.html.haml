@@ -1,0 +1,10 @@
+%h1 New photos
+= form_for [@res,@photo], method: :post, html: { multipart: true } do |f|
+  = f.file_field :image
+  = f.label :name
+  %br
+  = f.text_field :name
+  %br
+    = f.label 'Upload'
+  = f.submit 'Upload',class:'btn btn-default'
+  = link_to 'Back', :back,class:'btn btn-default'

@@ -1,0 +1,7 @@
+= link_to 'New photos', new_user_photo_path(@res)
+%br
+- @res.photos.each do |photo|
+
+  = link_to(image_tag(photo.image.url(:thumb)), url_for([@res,photo]))
+
+
