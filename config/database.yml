@@ -53,12 +53,11 @@ test: &test
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
   database: SoccSite_production
-  username: SoccSite
-  password: <%= ENV['SOCCSITE_DATABASE_PASSWORD'] %>
-  encoding: utf8mb4
-  collation: utf8mb4_unicode_ci
+  username: postgres
+  password: root
+  encoding: unicode
 
 cucumber:
   <<: *test
