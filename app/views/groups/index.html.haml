@@ -4,13 +4,14 @@
 - if @groups.present?
   - @groups.each do |group|
     .row
-      .col-lg-4
-        .well.sidebar-nav
+      .col-lg-4{ class: 'panel panel-default'}
+        %div{ class: 'panel-body'}
           - group.photos.each do |photo|
             - if photo.image.present?
               = link_to(image_tag(photo.image.url(:thumb)),url_for([group, photo]))
             - else
               = image_tag 'missing_avatar.png', size: '200x200'
-      .col-lg-8
-        .well.sidebar-nav
+      .col-lg-8{ class: 'panel panel-default'}
+        %div{ class: 'panel-body'}
           %h1= link_to group.name, group
+          %p= @group.description

@@ -1,13 +1,15 @@
-%h1
-  = @post.name
-%br
-%p= @post.text
-- if @post.photos.present?
-  - @post.photos.each do |photo|
-    - if photo.image.present?
-      = image_tag(photo.image.url(:medium))
-%p
-  = link_to image_tag('loys.png'), like_user_post_path(@user,@post)
-  = (''+@post.likes.size.to_s+' Likes')
-%br
-= link_to 'Back', :back,class:'btn btn-default'
+%div{ class: 'panel panel-default'}
+  %div{ class: 'panel-body'}
+    %h1
+      = @post.name
+    %br
+    %p= @post.text
+    - if @post.photos.present?
+      - @post.photos.each do |photo|
+        - if photo.image.present?
+          = image_tag(photo.image.url(:medium))
+    %p
+      = link_to image_tag('loys.png'), like_user_post_path(@user,@post)
+      = (''+@post.likes.size.to_s+' Likes')
+    %br
+    = link_to 'Back', :back,class:'btn btn-default'

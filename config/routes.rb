@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :like, on: :member
       get :dislike, on: :member
     end
+    post :new_avatar, on: :member
   end
 
   resources :users do

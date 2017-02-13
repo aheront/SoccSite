@@ -4,9 +4,9 @@
   %br
   = f.text_field :name,class:'form-control'
   %br
-  = f.label :image
+  = f.label :description
   %br
-  = f.file_field :image
+  = f.text_area :description,size: '80x10',class:'form-control'
   %br
   = f.submit 'Create',class:'btn btn-primary'
   = link_to 'Back', :back,class:'btn btn-default'

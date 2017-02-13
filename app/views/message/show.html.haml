@@ -1,19 +1,20 @@
-.well.sidebar-nav
-  %h3
-    = link_to 'To: '+ @message.user.first_name + ' ' + @message.user.last_name, user_path(@message.user)
-  %h4
-    = link_to 'From: '+ User.find(@message.user_from).first_name + ' ' + User.find(@message.user_from).last_name,user_path(User.find(@message.user_from))
-  %p
-    = content_with_emoji(@message.message_text.html_safe)
-
-  %br
-    - if @message.photos.present?
-      - @message.photos.each do |photo|
-        - if photo.image.present?
-          = image_tag(photo.image.url(:medium))
+%div{ class: 'panel panel-default'}
+  %div{ class: 'panel-body'}
+    %h3
+      = link_to 'To: '+ @message.user.first_name + ' ' + @message.user.last_name, user_path(@message.user)
+    %h4
+      = link_to 'From: '+ User.find(@message.user_from).first_name + ' ' + User.find(@message.user_from).last_name,user_path(User.find(@message.user_from))
     %p
-      Time send:
-      = @message.created_at.in_time_zone('Europe/Kiev')
+      = content_with_emoji(@message.message_text.html_safe)
+
     %br
-    = link_to 'Delete', message_path(@message),method: :delete,class:'btn btn-danger'
-    = link_to 'Back', :back,class:'btn btn-default'
+      - if @message.photos.present?
+        - @message.photos.each do |photo|
+          - if photo.image.present?
+            = image_tag(photo.image.url(:medium))
+      %p
+        Time send:
+        = @message.created_at.in_time_zone('Europe/Kiev')
+      %br
+      = link_to 'Delete', message_path(@message),method: :delete,class:'btn btn-danger'
+      = link_to 'Back', :back,class:'btn btn-default'

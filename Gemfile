@@ -92,6 +92,7 @@ end
 gem 'devise'
 gem 'haml'
 gem 'pg'
+gem 'mysql2'
 gem "therubyracer"
 gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"

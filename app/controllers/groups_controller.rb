@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy, :update]
+  before_action :authenticate_user!, only: [:new, :create, :destroy, :update,:new_avatar]
 
-  before_action :load_group, only: [:show, :destroy,:update]
+  before_action :load_group, only: [:show, :destroy,:update,:new_avatar]
 
   def index
    @groups = Group.all
@@ -12,11 +12,9 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.create(group_params)
+    @group = Group.new(group_params)
+    @group.user_id = current_user.id
     if @group.save
-      if image_params.present?
-        @group.photo = @group.photos.create(image_params)
-      end
       redirect_to @group
     else
       render new_group_path
@@ -24,6 +22,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @photo = @group.photos.last
   end
 
   def update
@@ -33,15 +32,19 @@ class GroupsController < ApplicationController
     @group.destroy
     redirect_to groups_index_path
   end
+  def new_avatar
+    @group.photos.create(image_params)
+    redirect_to @group
+  end
 
   private
 
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name,:description)
   end
 
   def image_params
-    params.require(:group).permit(:image)
+    params.require(:photo).permit(:image)
   end
 
   def load_group

@@ -13,7 +13,7 @@ class AudiosController < ApplicationController
   end
 
   def create
-    @audio = res_params.audios.create(audios_params)
+    @audio = res_params.audios.new(audios_params)
     if @audio.save
       redirect_to user_audios_path(current_user.id)
     else

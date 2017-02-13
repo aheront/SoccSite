@@ -64,7 +64,9 @@
       %div{ class: 'panel-body'}
         - if @user.posts.present?
           - @user.posts.each do |post|
-            = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
+            - if current_user == @user
+              .text-right
+                = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
             %h2
               = link_to post.name, user_post_path(@user,post)
             %p= post.text.truncate(255)
@@ -75,7 +77,9 @@
             %br
               = link_to image_tag('loys.png'), like_user_post_path(@user,post)
               = (''+post.likes.count.to_s+' Likes')
-
+        - else
+          .text-center
+            Not have posts
 
 
 
