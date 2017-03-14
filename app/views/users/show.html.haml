@@ -4,15 +4,15 @@
       %div{ class: 'panel-body'}
         -if @user.photo.present?
           .text-center
-            = link_to(image_tag(@user.photo.image.url(:thumb)), user_photo_path(@user,@user.photo))
+            = link_to(image_tag(@user.photo.image.url(:thumb),size:''), user_photo_path(@user,@user.photo))
         - else
           .text-center
             = image_tag 'missing_avatar.png', size: '200x200'
         %br
         - if @user!=current_user
-          %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
+          %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal2",
           "data-toggle" => "modal", :type => "button"} New messages
-          #myModal.modal.fade
+          #myModal2.modal.fade
             .modal-dialog
               .modal-content
                 .modal-header
@@ -47,8 +47,7 @@
                     .modal-footer
                       = f.submit 'Edit',:class => 'btn btn-default'
                       %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-
-    .col-lg-8{ class: 'panel panel-default'}
+    .col-lg-7{ class: 'panel panel-default', style:'margin-left:20px;'}
       %div{ class: 'panel-body'}
         %h2= @user.first_name+" "+@user.last_name
         %p= @user.email
@@ -60,12 +59,12 @@
           = link_to(image_tag(p.image.url(:thumb), width:'100'), url_for([@user,p]))
 
 %div
-  .row
-    .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
-      %div{ class: 'panel-body'}
-        - if @user.posts.present?
-          - @user.posts.each do |post|
-            - if current_user == @user
+  - if @user.posts.present?
+    - @user.posts.each do |post|
+      - if current_user == @user
+        .row
+          .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
+            %div{ class: 'panel-body'}
               .text-right
                 = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
             %h2
@@ -78,9 +77,12 @@
             %br
               = link_to image_tag('loys.png'), like_user_post_path(@user,post)
               = (''+post.likes.count.to_s+' Likes')
-        - else
-          .text-center
-            Not have posts
+      - else
+        .row
+          .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
+            %div{ class: 'panel-body'}
+              .text-center
+                Not have posts
 
 
 
