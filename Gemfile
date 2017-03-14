@@ -91,7 +91,7 @@ group :development, :test do
 end
 gem 'devise'
 gem 'haml'
-gem 'mysql2'
+gem 'pg'
 gem "therubyracer"
 gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"
@@ -130,8 +130,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'unicorn'
-group :production do
-  gem 'rails_12factor'
-  gem 'pg'
-end
 
+gem 'rails_12factor'
+
+ruby '2.3.3'

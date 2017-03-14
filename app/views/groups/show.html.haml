@@ -1,32 +1,54 @@
 %div
   .row
-    .col-lg-4
-      .well.sidebar-nav
-        - @group.photos.each do |photo|
-          - if photo.image.present?
-            = link_to(image_tag(photo.image.url(:thumb)),url_for([@group, photo]))
-          - else
+    .col-lg-4{ class: 'panel panel-default'}
+      %div{ class: 'panel-body'}
+        - if @photo.present?
+          .text-center
+            = link_to(image_tag(@photo.image.url(:thumb)),url_for([@group, @photo]))
+        - else
+          .text-center
             = image_tag 'missing_avatar.png', size: '200x200'
-    .col-lg-8
-      .well.sidebar-nav
+        %br
+        - if @group.user_id == current_user.id
+          %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal2",
+              "data-toggle" => "modal", :type => "button"} Edit avatar
+          #myModal2.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"data-dismiss" => "modal", :type => "button"} ×
+                  %h4.modal-title Edit avatar
+                  .modal-body
+                    = form_for Photo.new, url:new_avatar_group_path(@group.id), method: :post, html: { multipart: true } do |f|
+                      = f.file_field :image
+                      %br
+                      .modal-footer
+                        = f.submit 'Edit',:class => 'btn btn-default'
+                        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+    .col-lg-8{ class: 'panel panel-default'}
+      %div{ class: 'panel-body'}
         %h1= @group.name
+        %p= @group.description
 %div
   .row
-    = link_to 'New posts', new_group_post_path(@group)
-    - if @group.posts.present?
-      - @group.posts.each do |post|
-        = link_to '',group_post_path(@group,post),method: :delete, class: 'glyphicon glyphicon-remove'
-        .well.sidebar-nav
-          %h1
-            = link_to post.name, group_post_path(@group,post)
-          %p= post.text
-          - post.photos.each do |photo|
-            - if photo.image.present?
-              = link_to(image_tag(photo.image.url(:thumb)), url_for([@group,post, photo]))
-              %br
-          %br
-            = form_for :like, url: group_post_likes_path(@group,post), method: :post, html: { multipart: true },remote:true do |f|
-              = f.hidden_field :source =>  post
-              = f.submit '', :type => :image, :src => image_path('loys.png')
+    - if current_user.id == @group.user_id
+      = link_to 'New posts', new_group_post_path(@group)
+    .col-lg-12{ class: 'panel panel-default'}
+      %div{ class: 'panel-body'}
+        - if @group.posts.present?
+          - @group.posts.each do |post|
+            - if current_user.id == @group.user_id
+              = link_to '',group_post_path(@group,post),method: :delete, class: 'glyphicon glyphicon-remove'
+            %h2
+              = link_to post.name, group_post_path(@group,post)
+            %p= post.text
+            - post.photos.each do |photo|
+              - if photo.image.present?
+                = link_to(image_tag(photo.image.url(:thumb)), url_for([@group,post, photo]))
+            %br
+            = link_to image_tag('loys.png'), like_user_post_path(@group,post)
             = (''+post.likes.count.to_s+' Likes')
 
+        - else
+          .text-center
+            Not have posts

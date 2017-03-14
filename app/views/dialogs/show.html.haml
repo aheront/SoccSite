@@ -1,0 +1,16 @@
+= link_to 'New messages', new_user_dialog_message_path(current_user.id,@dialog.id)
+%br
+- @messages.each do |message|
+  .text-right
+    = link_to '', message_path(message),method: :delete, class: 'glyphicon glyphicon-remove'
+  %div{ class: 'panel panel-default'}
+    %div{ class: 'panel-body'}
+      %h3
+        = 'To: '+ message.user.first_name + ' ' + message.user.last_name
+      %h4
+        =  'From: '+ User.find(message.user_from).first_name + ' ' + User.find(message.user_from).last_name
+      %p
+        = link_to content_with_emoji(message.message_text.html_safe.truncate(255)), message_path(message),size:'20x20'
+      %p
+        Time send:
+        = message.created_at.in_time_zone('Europe/Kiev')

@@ -1,0 +1,18 @@
+%div{ class: 'panel panel-default'}
+  %div{ class: 'panel-body'}
+    %h4
+      = link_to @message.user.first_name + ' ' + @message.user.last_name, user_path(User.find(@message.user))
+    %p
+      = content_with_emoji(@message.message_text.html_safe)
+
+    %br
+      - if @message.photos.present?
+        - @message.photos.each do |photo|
+          - if photo.image.present?
+            = image_tag(photo.image.url(:medium))
+      %p
+        Time send:
+        = @message.created_at.in_time_zone('Europe/Kiev')
+      %br
+      = link_to 'Delete', user_dialog_message_path(@message.user_id,@message.dialog.id,@message),method: :delete,class:'btn btn-danger'
+      = link_to 'Back', :back,class:'btn btn-default'

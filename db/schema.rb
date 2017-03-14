@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119125837) do
+ActiveRecord::Schema.define(version: 20170303100456) do
 
-  create_table "audios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "audios", force: :cascade do |t|
     t.string   "name"
     t.string   "source_type"
     t.integer  "source_id"
@@ -24,17 +27,33 @@ ActiveRecord::Schema.define(version: 20170119125837) do
     t.datetime "sound_updated_at"
   end
 
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "dialogs", force: :cascade do |t|
     t.string   "name"
-    t.integer  "photo_id"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dialogs_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "dialog_id"
+    t.index ["dialog_id"], name: "index_dialogs_users_on_dialog_id", using: :btree
+    t.index ["user_id"], name: "index_dialogs_users_on_user_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "photos_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "photo_id"
+    t.text     "description"
     t.index ["photo_id"], name: "index_groups_on_photo_id", using: :btree
+    t.index ["photos_id"], name: "index_groups_on_photos_id", using: :btree
     t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
   end
 
-  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "likes", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "source_type"
     t.integer  "source_id"
@@ -43,17 +62,17 @@ ActiveRecord::Schema.define(version: 20170119125837) do
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
-    t.text     "message_text", limit: 16777215
+  create_table "messages", force: :cascade do |t|
+    t.text     "message_text"
     t.integer  "user_id"
-    t.integer  "user_from"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.index ["user_from"], name: "index_messages_on_user_from", using: :btree
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "dialog_id"
+    t.index ["dialog_id"], name: "index_messages_on_dialog_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
-  create_table "photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "photos", force: :cascade do |t|
     t.string   "name"
     t.string   "source_type"
     t.integer  "source_id"
@@ -65,49 +84,50 @@ ActiveRecord::Schema.define(version: 20170119125837) do
     t.datetime "image_updated_at"
   end
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "name"
-    t.text     "text",        limit: 65535
+    t.text     "text"
     t.string   "source_type"
     t.integer  "source_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "user_to_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_to_groups", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "group_id"
+    t.integer  "groups_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_user_to_groups_on_group_id", using: :btree
+    t.index ["groups_id"], name: "index_user_to_groups_on_groups_id", using: :btree
     t.index ["user_id"], name: "index_user_to_groups_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                                default: "", null: false
-    t.string   "encrypted_password",                   default: "", null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "login"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "sex"
     t.date     "birthday"
-    t.text     "preference",             limit: 65535
+    t.text     "preference"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "sex"
     t.integer  "photo_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["photo_id"], name: "index_users_on_photo_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "videos", force: :cascade do |t|
     t.string   "name"
     t.string   "source_type"
     t.integer  "source_id"
