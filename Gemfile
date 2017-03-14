@@ -92,7 +92,6 @@ end
 gem 'devise'
 gem 'haml'
 gem 'pg'
-gem 'mysql2'
 gem "therubyracer"
 gem 'thor', '~> 0.19.1'
 gem "twitter-bootstrap-rails"
@@ -133,6 +132,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'unicorn'
 
 gem 'rails_12factor'
-
 
 ruby '2.3.3'

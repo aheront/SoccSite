@@ -1,4 +1,4 @@
-= link_to 'New message', new_message_path
+= link_to 'New messages', new_user_dialog_message_path(current_user.id,@dialog.id)
 %br
 - @messages.each do |message|
   .text-right

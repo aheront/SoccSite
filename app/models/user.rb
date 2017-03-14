@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :messages,dependent: :destroy
   has_many :groups, through: :user_to_groups
   validates :email, uniqueness: true
+  has_and_belongs_to_many :dialogs
 end

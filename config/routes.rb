@@ -22,9 +22,12 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    resources :dialogs do
+      resources :messages do
+        resources :photos
+      end
+    end
     resources :posts do
-      resources :audios
-      resources :videos
       resources :photos
       get :like, on: :member
       get :dislike, on: :member
@@ -42,11 +45,7 @@ Rails.application.routes.draw do
 
   resources :home
 
-  resources :message do
-    resources :audios
-    resources :videos
-    resources :photos
-  end
+
 
 
   root to: 'home#index'

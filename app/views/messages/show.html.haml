@@ -1,9 +1,7 @@
 %div{ class: 'panel panel-default'}
   %div{ class: 'panel-body'}
-    %h3
-      = link_to 'To: '+ @message.user.first_name + ' ' + @message.user.last_name, user_path(@message.user)
     %h4
-      = link_to 'From: '+ User.find(@message.user_from).first_name + ' ' + User.find(@message.user_from).last_name,user_path(User.find(@message.user_from))
+      = link_to @message.user.first_name + ' ' + @message.user.last_name, user_path(User.find(@message.user))
     %p
       = content_with_emoji(@message.message_text.html_safe)
 
@@ -16,5 +14,5 @@
         Time send:
         = @message.created_at.in_time_zone('Europe/Kiev')
       %br
-      = link_to 'Delete', message_path(@message),method: :delete,class:'btn btn-danger'
+      = link_to 'Delete', user_dialog_message_path(@message.user_id,@message.dialog.id,@message),method: :delete,class:'btn btn-danger'
       = link_to 'Back', :back,class:'btn btn-default'

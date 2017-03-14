@@ -11,15 +11,15 @@
         %br
         - if @user!=current_user
           %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
-          "data-toggle" => "modal", :type => "button"} New message
+          "data-toggle" => "modal", :type => "button"} New messages
           #myModal.modal.fade
             .modal-dialog
               .modal-content
                 .modal-header
                   %button.close{"data-dismiss" => "modal", :type => "button"} ×
-                  %h4.modal-title New message
+                  %h4.modal-title New messages
                 .modal-body
-                  = form_for Message.new, url: '/message', method: :post, html: { multipart: true } do |f|
+                  = form_for Message.new, url: '/messages', method: :post, html: { multipart: true } do |f|
                     = f.hidden_field :user_id, value: @user.id
                     = f.label @user.first_name + ' ' + @user.last_name.to_s
                     %br
@@ -47,6 +47,7 @@
                     .modal-footer
                       = f.submit 'Edit',:class => 'btn btn-default'
                       %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
     .col-lg-8{ class: 'panel panel-default'}
       %div{ class: 'panel-body'}
         %h2= @user.first_name+" "+@user.last_name
