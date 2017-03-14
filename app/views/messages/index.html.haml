@@ -6,7 +6,7 @@
     %p.emoji-picker-container
       = f.text_area :message_text, data: { emojiable: true }
   %br
-  = f.file_field :image,id:'pictureInput'
+  = f.file_field :image, id:'pictureInput'
   #target
   %br
   = f.submit 'Send',class:'btn btn-primary'
@@ -20,7 +20,11 @@
       %h4
         = message.user.first_name + ' ' + message.user.last_name
       %p
-        = link_to content_with_emoji(message.message_text.html_safe.truncate(255)), user_dialog_message_path(message.user.id,message.dialog.id,message.id),size:'20x20'
+        = link_to content_with_emoji(message.message_text.html_safe), user_dialog_message_path(message.user.id,message.dialog.id,message.id),size:'20x20'
+      %p
+        -if message.photos.present?
+          - message.photos.each do |p|
+            =image_tag(p.image.url(:medium))
       %p
         Time send:
         = message.created_at.in_time_zone('Europe/Kiev')

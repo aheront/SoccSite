@@ -7,7 +7,7 @@
         = link_to d.name, user_dialog_path(current_user.id,d.id)
         %br
         - if d.messages.present?
-          = d.messages.order(created_at: :desc).first.message_text
+          = content_with_emoji(d.messages.order(created_at: :desc).first.message_text.html_safe.truncate(255))
         %br
   -else
     %div{ class: 'panel panel-default'}
@@ -15,5 +15,5 @@
         = link_to d.users.first.first_name + ' ' + d.users.first.last_name, user_dialog_path(current_user.id,d.id)
         %br
         - if d.messages.present?
-          = d.messages.order(created_at: :desc).first.message_text
+          = content_with_emoji(d.messages.order(:created_at => :desc).first.message_text.html_safe.truncate(255))
         %br
