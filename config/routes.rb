@@ -33,7 +33,10 @@ Rails.application.routes.draw do
       get :dislike, on: :member
     end
     post :new_avatar, on: :member
-
+    get  :request_friend_index, on: :collection
+    get  :all_people, on: :collection
+    post :friend_new, on: :member
+    delete :friend_del, on: :member
     resources :audios
     resources :videos
     resources :photos do

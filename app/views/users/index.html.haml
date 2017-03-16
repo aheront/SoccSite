@@ -1,24 +1,35 @@
-- @users.each do |user|
-   %div
-      .row
-         .col-lg-4{ class: 'panel panel-default'}
-            %div{ class: 'panel-body'}
-               -if user.photo.present?
+.btn-group.btn-group-justified
+  .btn-group
+    =button_to 'Friends',users_path,class:'btn',method: :get
+  .btn-group
+    =button_to 'Request to friend',request_friend_index_users_path,class:'btn',method: :get
+  .btn-group
+    =button_to 'All people',all_people_users_path,class:'btn',method: :get
+%br
+- if @users.present?
+  - @users.each do |user|
+    - if user.friend.users.present?
+      - if user.friend.users.find_by(id: current_user.id)
+        %div
+          .row
+            .col-lg-4{ class: 'panel panel-default'}
+              %div{ class: 'panel-body'}
+                -if user.photo.present?
                   .text-center
-                     = image_tag(user.photo.image.url(:thumb))
-               - else
+                    = image_tag(user.photo.image.url(:thumb))
+                - else
                   .text-center
-                     = image_tag 'missing_avatar.png', size: '200x200'
-         .col-lg-8{ class: 'panel panel-default'}
-            %div{ class: 'panel-body'}
-               %h2
+                    = image_tag 'missing_avatar.png', size: '200x200'
+            .col-lg-8{ class: 'panel panel-default'}
+              %div{ class: 'panel-body'}
+                %h2
                   = link_to user.first_name.to_s+' '+user.last_name.to_s, user_path(user)
-               %p
+                %p
                   = user.email
-               %p
+                %p
                   = user.birthday
-               %p
+                %p
                   = user.sex
-   %br
+        %br
 
 
