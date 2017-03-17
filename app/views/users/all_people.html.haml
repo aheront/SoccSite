@@ -1,5 +1,5 @@
-=render partial: 'buttons_community'
+=render partial: 'users/partial/buttons_community'
 %br
 - if @users.present?
   -@users.each do |user|
-    = render partial: 'user_index', locals: { user: user }
+    = render partial: 'users/partial/user_index', locals: { user: user }

@@ -1,4 +1,4 @@
-=render partial: 'buttons_community'
+=render partial: 'users/partial/buttons_community'
 %br
 - if @users.present?
   - @users.each do |user|
@@ -6,4 +6,4 @@
       - if user.friend.users.find_by(id: current_user.id)
         -if current_user.friend.users.find_by(id: user.id)
         -else
-          = render partial: 'user_index', locals: { user: user }
+          = render partial: 'users/partial/user_index', locals: { user: user }

@@ -1,0 +1,26 @@
+%div
+  - if @user.posts.present?
+    - @user.posts.each do |post|
+      .row
+        .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
+          %div{ class: 'panel-body'}
+            .col-lg-11
+              %h3
+                = link_to post.name, user_post_path(@user,post)
+              %p= post.text.truncate(255)
+              - post.photos.each do |photo|
+                - if photo.image.present?
+                  = link_to(image_tag(photo.image.url(:medium)), url_for([@user,post,photo]))
+                  %br
+              %br
+                = link_to image_tag('loys.png'), like_user_post_path(@user,post)
+                = (''+post.likes.count.to_s+' Likes')
+            .col-lg-1
+              - if current_user == @user
+                = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
+  - else
+    .row
+      .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
+        %div{ class: 'panel-body'}
+          .text-center
+            Not have posts

@@ -2,94 +2,11 @@
   .row
     .col-lg-4{ class: 'panel panel-default'}
       %div{ class: 'panel-body'}
-        -if @user.photo.present?
-          .text-center
-            = link_to(image_tag(@user.photo.image.url(:thumb),size:''), user_photo_path(@user,@user.photo))
-        - else
-          .text-center
-            = image_tag 'missing_avatar.png', size: '200x200'
-        %br
-          .btn-group.btn-group-justified
-          - if @user!=current_user
-            - if current_user.friend.users.find_by(id:@user.id).nil?
-              .btn-group
-                = button_to '+ new friend', friend_new_user_path,class:'btn btn-info'
-            -else
-              .btn-group
-                = button_to '✓ your friend', friend_del_user_path,method: :delete, class:'btn btn-info'
-            .btn-group
-              %button.btn.btn-info{"data-target" => "#myModal2",
-              "data-toggle" => "modal", :type => "button"} New message
-              #myModal2.modal.fade
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      %button.close{"data-dismiss" => "modal", :type => "button"} ×
-                      %h4.modal-title New messages
-                    .modal-body
-                      = form_for Message.new, url: '/messages', method: :post, html: { multipart: true } do |f|
-                        = f.hidden_field :user_id, value: @user.id
-                        = f.label @user.first_name + ' ' + @user.last_name.to_s
-                        %br
-                        = f.label 'Message'
-                        %p.emoji-picker-container{:size => "6"}
-                          = f.text_area :message_text,:size => '80x10', data: { emojiable: true }
-                        = f.file_field :image
-                        %br
-                        .modal-footer
-                          = f.submit 'Send',:class => 'btn btn-default'
-                          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-          - else
-            %button.btn.center-block.btn-info.btn-lg{"data-target" => "#myModal",
-            "data-toggle" => "modal", :type => "button"} Edit avatar
-            #myModal.modal.fade
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    %button.close{"data-dismiss" => "modal", :type => "button"} ×
-                    %h4.modal-title Edit avatar
-                  .modal-body
-                    = form_for Photo.new, url:new_avatar_user_path(current_user.id), method: :post, html: { multipart: true } do |f|
-                      = f.file_field :image
-                      %br
-                      .modal-footer
-                        = f.submit 'Edit',:class => 'btn btn-default'
-                        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+        =render partial: 'partial/avatar'
+        =render partial: 'users/partial/friend'
     .col-lg-7{ class: 'panel panel-default', style:'margin-left:20px;'}
-      %div{ class: 'panel-body'}
-        %h2= @user.first_name+" "+@user.last_name
-        %p= @user.email
-        %p= @user.birthday
-        %p= @user.sex
-        %h4
-          Photo:
-        - @user.photos.first(5).each do |p|
-          = link_to(image_tag(p.image.url(:thumb), width:'100'), url_for([@user,p]))
-%div
-  - if @user.posts.present?
-    - @user.posts.each do |post|
-      - if current_user == @user
-        .row
-          .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
-            %div{ class: 'panel-body'}
-              .text-right
-                = link_to '', user_post_path(@user,post),method: :delete, :class => 'glyphicon glyphicon-remove -align-right'
-            %h2
-              = link_to post.name, user_post_path(@user,post)
-            %p= post.text.truncate(255)
-            - post.photos.each do |photo|
-              - if photo.image.present?
-                = link_to(image_tag(photo.image.url(:medium)), url_for([@user,post,photo]))
-                %br
-            %br
-              = link_to image_tag('loys.png'), like_user_post_path(@user,post)
-              = (''+post.likes.count.to_s+' Likes')
-  - else
-    .row
-      .col-lg-12{ class: 'panel panel-default',style:'padding:15px;'}
-        %div{ class: 'panel-body'}
-          .text-center
-            Not have posts
+      =render partial: 'users/partial/show_user_form'
+=render partial: 'partial/post_index'
 
 
 

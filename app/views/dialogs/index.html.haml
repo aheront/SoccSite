@@ -1,19 +1,26 @@
 = link_to 'New dialog',new_user_dialog_path(current_user.id)
 %br
 - @dialogs.each do |d|
-  - if d.name.present?
-    %div{ class: 'panel panel-default'}
-      %div{ class: 'panel-body'}
-        = link_to d.name, user_dialog_path(current_user.id,d.id)
-        %br
-        - if d.messages.present?
-          = content_with_emoji(d.messages.order(created_at: :desc).first.message_text.html_safe.truncate(255))
-        %br
-  -else
-    %div{ class: 'panel panel-default'}
-      %div{ class: 'panel-body'}
-        = link_to d.users.first.first_name + ' ' + d.users.first.last_name, user_dialog_path(current_user.id,d.id)
-        %br
-        - if d.messages.present?
-          = content_with_emoji(d.messages.order(:created_at => :desc).first.message_text.html_safe.truncate(255))
-        %br
+  .row
+    .col-lg-11
+      - if d.name.present?
+        %div{ class: 'panel panel-default'}
+          %div{ class: 'panel-body'}
+            = link_to d.name, user_dialog_path(current_user.id,d.id)
+            %br
+            - if d.messages.present?
+              = content_with_emoji(d.messages.order(created_at: :desc).first.message_text.html_safe.truncate(255))
+            %br
+      -else
+        %div{ class: 'panel panel-default'}
+          %div{ class: 'panel-body'}
+            - d.users.each do |u|
+              -if u.id != current_user.id
+                - @us = u
+            = link_to @us.first_name + ' ' + @us.last_name, user_dialog_path(current_user.id,d.id)
+            %br
+            - if d.messages.present?
+              = content_with_emoji(d.messages.order(:created_at => :desc).first.message_text.html_safe.truncate(255))
+            %br
+    .col-lg-1
+      = link_to '', user_dialog_path(current_user.id,d.id),method: :delete, class: 'glyphicon glyphicon-remove'

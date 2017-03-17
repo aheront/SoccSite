@@ -1,0 +1,7 @@
+-if @user.photo.present?
+  .text-center
+    = link_to(image_tag(@user.photo.image.url(:thumb),size:''), user_photo_path(@user,@user.photo))
+- else
+  .text-center
+    = image_tag 'missing_avatar.png', size: '200x200'
+%br

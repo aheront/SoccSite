@@ -8,7 +8,7 @@
         - else
           .text-center
             = image_tag 'missing_avatar.png', size: '200x200'
-    .col-lg-8{ class: 'panel panel-default'}
+    .col-lg-7{ class: 'panel panel-default', style:'margin-left:20px;'}
       %div{ class: 'panel-body'}
         %h2
           = link_to user.first_name.to_s+' '+user.last_name.to_s, user_path(user)

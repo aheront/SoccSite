@@ -1,0 +1,17 @@
+- @messages.each do |message|
+  .text-right
+    - if message.user == current_user
+      = link_to '', user_dialog_message_path(message.user.id,message.dialog.id,message.id),method: :delete, class: 'glyphicon glyphicon-remove'
+  %div{ class: 'panel panel-default'}
+    %div{ class: 'panel-body'}
+      %h4
+        = message.user.first_name + ' ' + message.user.last_name
+      %p
+        = link_to content_with_emoji(message.message_text.html_safe), user_dialog_message_path(message.user.id,message.dialog.id,message.id),size:'20x20'
+      %p
+        -if message.photos.present?
+          - message.photos.each do |p|
+            =image_tag(p.image.url(:medium))
+      %p
+        Time send:
+        = message.created_at.in_time_zone('Europe/Kiev')
