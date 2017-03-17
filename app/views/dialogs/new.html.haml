@@ -4,9 +4,10 @@
   %br
   = f.select :user_ids,  User.all.collect { |p| [ p.first_name + ' ' + p.last_name, p.id ] }
   %br
-  = f.label 'Dialog'
-  = f.label 'Name'
+  = f.label 'Dialog Name'
+  %br
   = f.text_field :name
   %br
-  = f.submit 'create',class:'btn btn-primary'
-  = link_to 'Back', :back,class:'btn btn-default'
+  %p
+    = f.submit 'create',class:'btn btn-primary'
+    = link_to 'Back', :back,class:'btn btn-default'

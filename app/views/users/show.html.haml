@@ -9,7 +9,7 @@
           .text-center
             = image_tag 'missing_avatar.png', size: '200x200'
         %br
-        .btn-group.btn-group-justified
+          .btn-group.btn-group-justified
           - if @user!=current_user
             - if current_user.friend.users.find_by(id:@user.id).nil?
               .btn-group
