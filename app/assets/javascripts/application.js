@@ -15,5 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require rails_emoji_picker
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require_tree .
 

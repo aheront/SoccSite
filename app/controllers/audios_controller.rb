@@ -6,6 +6,7 @@ class AudiosController < ApplicationController
   def index
     @res = res_params
     @audios = current_user.audios
+    @audio = Audio.new
   end
 
   def new
@@ -13,12 +14,8 @@ class AudiosController < ApplicationController
   end
 
   def create
-    @audio = res_params.audios.new(audios_params)
-    if @audio.save
-      redirect_to user_audios_path(current_user.id)
-    else
-      render new_audio_path
-    end
+    @audio = res_params.audios.create(audios_params)
+
   end
 
   def destroy

@@ -5,6 +5,8 @@ class VideosController < ApplicationController
 
   def index
     @videos = res_params.videos
+    @res = res_params
+    @video = Video.new
   end
 
   def new
@@ -17,11 +19,6 @@ class VideosController < ApplicationController
 
   def create
     @video =  res_params.videos.create(videos_params)
-    if @video.save
-     redirect_to user_videos_path(current_user.id)
-    else
-      render new_video_path
-    end
   end
 
   def destroy
@@ -35,7 +32,7 @@ class VideosController < ApplicationController
   end
 
   def videos_params
-    params.require(:video).permit(:file, :file_name)
+    params.require(:video).permit(:file)
   end
   def res_params
     if params[:user_id].nil?
