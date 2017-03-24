@@ -1,0 +1,7 @@
+.btn-group.btn-group-justified
+  .btn-group
+    =button_to 'Friends',users_path,class:'btn',method: :get
+  .btn-group
+    =button_to 'Request to friend',request_friend_index_users_path,class:'btn',method: :get
+  .btn-group
+    =button_to 'All people',all_people_users_path,class:'btn',method: :get

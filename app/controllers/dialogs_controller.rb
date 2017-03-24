@@ -1,7 +1,7 @@
 class DialogsController < ApplicationController
   def index
     @dialogs = current_user.dialogs
-    @dialogs = @dialogs.order(:updated_at)
+    @dialogs = @dialogs.order(updated_at: :desc)
     Message.all.order(created_at: :desc)
   end
 
@@ -21,6 +21,12 @@ class DialogsController < ApplicationController
     if @dialog.save
       redirect_to user_dialogs_path(current_user.id)
     end
+  end
+
+  def destroy
+    @dialog = Dialog.find(params[:id])
+    @dialog.destroy
+    redirect_to user_dialogs_path(current_user.id)
   end
 
   private

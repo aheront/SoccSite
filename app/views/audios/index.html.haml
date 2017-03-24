@@ -1,10 +1,19 @@
-= link_to 'New audio', new_user_audio_path(current_user.id)
+= form_for [@res, @audio] do |f|
+  = f.label :audio,class:'text'
+  %br
+  = f.file_field :sound, multiple: true,name:'audio[sound]'
 %br
-- @res.audios.each do |audio|
-  %br
-  = audio.sound_file_name
-  = link_to '', user_audio_path(@res,audio),method: :delete, class: 'glyphicon glyphicon-remove'
-  %br
-  = audio_tag(audio.sound.url,  controls: true)
-  %br
+%div#audios
+  =render @audios
+%script#template-upload{:type => "text/x-tmpl"}
+  <div class="upload">
+  {%=o.name%}
+  <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>
+  </div>
+
+
+
+
+
 

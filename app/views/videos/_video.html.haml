@@ -1,0 +1,8 @@
+%br
+- @res.videos.each do |video|
+  %br
+  = video.file_file_name
+  = link_to '', user_video_path(@res,video),method: :delete, class: 'glyphicon glyphicon-remove'
+  %br
+  = video_tag(video.file.url,  controls: true)
+  %br

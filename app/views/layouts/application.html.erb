@@ -27,6 +27,9 @@
     <![endif]-->
   </head>
   <body style="background-color:ghostwhite">
+  <div class="loaderArea">
+    <div class="loader"></div>
+  </div>
     <div class="navbar navbar-inverse navbar-static-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -84,6 +87,14 @@
       </footer>
 
     </div> <!-- /container -->
+      <script>
+          $(window).on('load', function () {
+              $preloader = $('.loaderArea'),
+                  $loader = $preloader.find('.loader');
+              $loader.fadeOut();
+              $preloader.delay(350).fadeOut('slow');
+          });
+      </script>
 
   </body>
 </html>

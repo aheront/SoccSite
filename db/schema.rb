@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303100456) do
+ActiveRecord::Schema.define(version: 20170314111242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,21 @@ ActiveRecord::Schema.define(version: 20170303100456) do
     t.integer "dialog_id"
     t.index ["dialog_id"], name: "index_dialogs_users_on_dialog_id", using: :btree
     t.index ["user_id"], name: "index_dialogs_users_on_user_id", using: :btree
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_friends_on_user_id", using: :btree
+  end
+
+  create_table "friends_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
+    t.index ["friend_id"], name: "index_friends_users_on_friend_id", using: :btree
+    t.index ["user_id"], name: "index_friends_users_on_user_id", using: :btree
   end
 
   create_table "groups", force: :cascade do |t|

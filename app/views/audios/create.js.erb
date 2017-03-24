@@ -1,0 +1,5 @@
+<% if @audio.new_record? %>
+  alert("Failed to upload <%= j @audio.errors.full_messages.join(',').html_safe %>");
+<% else%>
+  $('#audios').append("<%= j render(@audio) %>");
+<% end%>
