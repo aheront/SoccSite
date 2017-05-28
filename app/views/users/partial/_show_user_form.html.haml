@@ -1,8 +1,20 @@
 %div{ class: 'panel-body'}
-  %h2= @user.first_name+" "+@user.last_name
-  %p= @user.email
-  %p= @user.birthday
-  %p= @user.sex
+  .row
+    %h2= @user.first_name+" "+@user.last_name
+    .col-lg-6
+      %p= 'Email:'
+      %p= 'Date Birthday:'
+      %p= 'Sex:'
+      %p= 'Adress:'
+      %p= 'City:'
+      %p= 'Country:'
+    .col-lg-6
+      %p= @user.email
+      %p= @user.birthday
+      %p= @user.sex
+      %p= (@user.street.name+" "+@user.house+"/"+@user.apartment).to_s
+      %p= City.find_by(id:@user.street.city_id).name
+      %p= Country.find_by(id:City.find_by(id:@user.street.city_id).country_id).name
   %h4
     Photo:
   - @user.photos.first(5).each do |p|

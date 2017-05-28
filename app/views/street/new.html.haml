@@ -1,0 +1,31 @@
+%h2 Edit street
+= form_for @street,url:'/street', method: :post do |f|
+  = f.label :street
+  %br
+  = f.text_field :name,class:'form-control'
+  = f.fields_for current_user do |ff|
+    .form-group
+      = ff.label :house
+      %br
+      = ff.text_field :house,class:'form-control'
+    .form-group
+      = ff.label :apartment
+      %br
+      = ff.text_field :apartment,class:'form-control'
+      = form_tag new_street_path do
+        #country.form-group
+          = f.label :country
+          = select_tag :country, options_for_select(@countries.collect{|p| [p.name, p.id]}, selected: params[:country]),
+                                        prompt: "Select country", class: "form-control"
+        #city.form-group
+          = f.label :city
+          = select_tag "city", options_for_select(@cities.collect{|p| [p.name, p.id]}, selected: params[:city]),
+                                        prompt: "Select city", class: "form-control"
+      = f.submit 'Submit', class:'btn btn-primary'
+:javascript
+  $(document).ready(function() {
+  $( "#street_city_id" ).select2();
+  $( "#street_country_id" ).select2();
+  });
+
+

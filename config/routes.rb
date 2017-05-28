@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users, controllers: {
       registrations: 'users/registrations',
   }
@@ -47,6 +48,9 @@ Rails.application.routes.draw do
   end
 
   resources :home
+  resources :street
+  get 'street/update_cities', as: 'update_cities'
+  get 'street/show'
 
 
 
