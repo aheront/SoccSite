@@ -66,6 +66,7 @@
                 <% if user_signed_in? %>
                     <li><%= link_to 'Show user', user_path(current_user) %></li>
                     <li><%= link_to 'Edit user', edit_user_registration_path, :class => 'navbar-link' %> </li>
+                    <li><%= link_to 'Edit street', new_street_path, :class => 'navbar-link' %> </li>
                     <li><%= link_to 'Photos', user_photos_path(current_user)  %></li>
                     <li><%= link_to 'Community', users_path  %></li>
                     <li><%= link_to 'Groups', groups_path  %></li>

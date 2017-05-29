@@ -16,11 +16,14 @@ class User < ApplicationRecord
   has_and_belongs_to_many :dialogs
   has_and_belongs_to_many :friends
   has_one :friend
+  belongs_to :street
+  accepts_nested_attributes_for :street
+
   after_create :create_friend
+
   def create_friend
     self.friend = Friend.create
   end
-  def get_friend
 
-  end
+
 end

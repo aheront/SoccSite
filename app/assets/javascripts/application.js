@@ -17,5 +17,6 @@
 //= require rails_emoji_picker
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require select2-full
 //= require_tree .
 
