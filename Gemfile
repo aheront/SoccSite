@@ -135,5 +135,7 @@ gem 'unicorn'
 
 gem 'rails_12factor'
 gem "select2-rails"
+gem 'rubocop'
+gem 'mina'
 
-ruby '2.3.3'
+ruby '2.6.0'
